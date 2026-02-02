@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 dotenv.config({ path: "./config/.env" });
 import express from "express";
 import cors from "cors";
+import router from "./router/index.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -21,6 +22,10 @@ app.use(
     credentials: true,
   }),
 );
+
+app.use(express.json());
+
+app.use("/api", router);
 
 app.get("/", (req, res) => {
   res.send("Welcome to Daare Restaurant Server");
